@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:ArbitrageClient"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800" WindowState="Maximized">
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit"/>
+            </MenuItem>
+        </Menu>
+    </DockPanel>
 </Window>
