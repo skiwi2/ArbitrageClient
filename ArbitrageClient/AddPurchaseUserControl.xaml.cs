@@ -16,17 +16,13 @@ using System.Windows.Shapes;
 namespace ArbitrageClient
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddPurchaseUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddPurchaseUserControl : UserControl
     {
-        public MainWindow()
+        public AddPurchaseUserControl()
         {
             InitializeComponent();
         }
-
-        private void FileExitClick(object sender, RoutedEventArgs e) => Close();
-
-        private void PurchasesNewClick(object sender, RoutedEventArgs e) => contentControl.Content = new AddPurchaseUserControl();
     }
 }

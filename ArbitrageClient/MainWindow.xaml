@@ -9,8 +9,12 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_Exit" Click="FileExitClick"/>
+                <MenuItem Header="_Exit" Click="FileExitClick" />
+            </MenuItem>
+            <MenuItem Header="_Purchases">
+                <MenuItem Header="_New" Click="PurchasesNewClick" />
             </MenuItem>
         </Menu>
+        <ContentControl x:Name="contentControl"/>
     </DockPanel>
 </Window>
