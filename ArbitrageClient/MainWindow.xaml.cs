@@ -25,6 +25,6 @@ namespace ArbitrageClient
             InitializeComponent();
         }
 
-        private void FileExitClick(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
+        private void FileExitClick(object sender, RoutedEventArgs e) => Close();
     }
 }
