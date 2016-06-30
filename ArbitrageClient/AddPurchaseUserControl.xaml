@@ -100,7 +100,6 @@
                     </Style.Triggers>
                 </Style>
             </TextBox.Style>
-            N/A
         </TextBox>
         <Label Grid.Row="14" Grid.Column="0">Total price:</Label>
         <TextBox Grid.Row="14" Grid.Column="1" IsEnabled="False" />
