@@ -230,22 +230,7 @@ namespace ArbitrageClient
             }
         }
 
-        public bool ShippingIncluded
-        {
-            get
-            {
-                return AddPurchaseModel.ShippingIncluded;
-            }
-
-            set
-            {
-                if (AddPurchaseModel.ShippingIncluded != value)
-                {
-                    AddPurchaseModel.ShippingIncluded = value;
-                    RaisePropertyChanged("ShippingIncluded");
-                }
-            }
-        }
+        public decimal ShippingIncludedCost { get; } = 0;
 
         public decimal TotalPrice
         {

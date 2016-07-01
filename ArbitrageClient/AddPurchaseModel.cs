@@ -153,19 +153,6 @@ namespace ArbitrageClient
             }
         }
 
-        public bool ShippingIncluded
-        {
-            get
-            {
-                return shippingIncluded;
-            }
-
-            set
-            {
-                shippingIncluded = value;
-            }
-        }
-
         public decimal TotalPrice
         {
             get

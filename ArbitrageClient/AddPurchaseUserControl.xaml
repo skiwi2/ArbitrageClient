@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:System;assembly=mscorlib"
+             xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:local="clr-namespace:ArbitrageClient"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
@@ -91,29 +92,49 @@
         <Label Grid.Row="10" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalContentAlignment="Center">Pricing</Label>
         
         <Label Grid.Row="11" Grid.Column="0">Selling price: </Label>
-        <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding SellingPrice, UpdateSourceTrigger=PropertyChanged}" />
-        
+        <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Label DockPanel.Dock="Left">€</Label>
+            <TextBox Width="60" TextAlignment="Right"
+                Text="{Binding SellingPrice, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
         <Label Grid.Row="12" Grid.Column="0">Extra cost: </Label>
-        <ComboBox Grid.Row="12" Grid.Column="1" x:Name="extraCost" 
+        <ComboBox Grid.Row="12" Grid.Column="1"
                   ItemsSource="{Binding Source={StaticResource ExtraCostType}, Converter={StaticResource ExtraCostTypeToText}, UpdateSourceTrigger=PropertyChanged}"
                   SelectedItem="{Binding ExtraCostType, Converter={StaticResource ExtraCostTypeValueToText}}" />
         
         <Label Grid.Row="13" Grid.Column="0"
                Visibility="{Binding ShowFuelCost, Converter={StaticResource BooleanToVisibilityConverter}}">Fuel Cost: </Label>
-        <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding FuelCost, UpdateSourceTrigger=PropertyChanged}" 
-                 Visibility="{Binding ShowFuelCost, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <StackPanel Grid.Row="13" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
+                    Visibility="{Binding ShowFuelCost, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Label DockPanel.Dock="Left">€</Label>
+            <TextBox Width="60" TextAlignment="Right"
+                Text="{Binding FuelCost, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
         
         <Label Grid.Row="13" Grid.Column="0"
                Visibility="{Binding ShowShippingCost, Converter={StaticResource BooleanToVisibilityConverter}}">Shipping Cost:</Label>
-        <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding ShippingCost, UpdateSourceTrigger=PropertyChanged}"
-                 Visibility="{Binding ShowShippingCost, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <StackPanel Grid.Row="13" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
+                    Visibility="{Binding ShowShippingCost, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Label DockPanel.Dock="Left">€</Label>
+            <TextBox Width="60" TextAlignment="Right"
+                Text="{Binding ShippingCost, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
         
         <Label Grid.Row="13" Grid.Column="0"
                Visibility="{Binding ShowShippingIncluded, Converter={StaticResource BooleanToVisibilityConverter}}">Shipping Cost:</Label>
-        <TextBox Grid.Row="13" Grid.Column="1" IsEnabled="False"
-                 Visibility="{Binding ShowShippingIncluded, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        <StackPanel Grid.Row="13" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
+                    Visibility="{Binding ShowShippingIncluded, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Label DockPanel.Dock="Left">€</Label>
+            <TextBox Width="60" TextAlignment="Right" IsEnabled="False" 
+                     Text="{Binding ShippingIncludedCost, Mode=OneWay}" />
+        </StackPanel>
         
         <Label Grid.Row="14" Grid.Column="0">Total price:</Label>
-        <TextBox Grid.Row="14" Grid.Column="1" IsEnabled="False" Text="{Binding TotalPrice, Mode=OneWay}" />
+        <StackPanel Grid.Row="14" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Label DockPanel.Dock="Left">€</Label>
+            <TextBox Width="60" TextAlignment="Right" IsEnabled="False"
+                Text="{Binding TotalPrice, Mode=OneWay}" />
+        </StackPanel>
     </Grid>
 </UserControl>
