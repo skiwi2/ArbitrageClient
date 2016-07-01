@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArbitrageClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" WindowState="Maximized">
+        Title="MainWindow" Height="600" Width="800" WindowState="Maximized" FontSize="14">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
