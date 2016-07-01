@@ -153,16 +153,25 @@ namespace ArbitrageClient
             }
         }
 
+        public decimal ShippingIncludedCost { get; } = 0;
+
         public decimal TotalPrice
         {
             get
             {
-                return totalPrice;
-            }
-
-            set
-            {
-                totalPrice = value;
+                decimal Total = SellingPrice;
+                switch (ExtraCostType)
+                {
+                    case ExtraCostType.FuelCost:
+                        Total += FuelCost;
+                        break;
+                    case ExtraCostType.ShippingCost:
+                        Total += ShippingCost;
+                        break;
+                    default:
+                        break;
+                }
+                return Total;
             }
         }
     }
