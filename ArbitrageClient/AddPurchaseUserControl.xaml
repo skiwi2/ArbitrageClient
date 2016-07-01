@@ -3,14 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:core="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:ArbitrageClient"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        
+        <local:ExtraCostTypeToTextConverter x:Key="ExtraCostTypeToText" />
+        <local:ExtraCostTypeValueToTextConverter x:Key="ExtraCostTypeValueToText" />
+        
+        <ObjectDataProvider x:Key="ExtraCostType" MethodName="GetValues" ObjectType="{x:Type core:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="local:ExtraCostType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    
+    <UserControl.DataContext>
+        <local:AddPurchaseViewModel />
+    </UserControl.DataContext>
+    
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -28,80 +47,73 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        
         <Grid.Resources>
             <Style TargetType="{x:Type TextBox}">
                 <Setter Property="Margin" Value="0,2,0,2" />
             </Style>
+            
             <Style TargetType="{x:Type ComboBox}">
                 <Setter Property="Margin" Value="0,2,0,2" />
             </Style>
+            
             <Style TargetType="{x:Type DatePicker}">
                 <Setter Property="Margin" Value="0,2,0,2" />
             </Style>
         </Grid.Resources>
+        
         <Label Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalContentAlignment="Center">General</Label>
+        
         <Label Grid.Row="1" Grid.Column="0">Purchase date: </Label>
-        <DatePicker Grid.Row="1" Grid.Column="1" />
+        <DatePicker Grid.Row="1" Grid.Column="1" Text="{Binding PurchaseDate}" />
+        
         <Label Grid.Row="2" Grid.ColumnSpan="2" Visibility="Hidden">Placeholder</Label>
+        
         <Label Grid.Row="3" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalContentAlignment="Center">Seller</Label>
+        
         <Label Grid.Row="4" Grid.Column="0">Name: </Label>
-        <TextBox Grid.Row="4" Grid.Column="1" />
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SellerName}" />
+        
         <Label Grid.Row="5" Grid.Column="0">Street: </Label>
-        <TextBox Grid.Row="5" Grid.Column="1" />
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SellerStreet}" />
+        
         <Label Grid.Row="6" Grid.Column="0">City: </Label>
-        <TextBox Grid.Row="6" Grid.Column="1" />
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding SellerCity}" />
+        
         <Label Grid.Row="7" Grid.Column="0">Tel. number: </Label>
-        <TextBox Grid.Row="7" Grid.Column="1" />
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding SellerTelephoneNumber}" />
+        
         <Label Grid.Row="8" Grid.Column="0">Comments: </Label>
-        <TextBox Grid.Row="8" Grid.Column="1" />
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding SellerComments}" />
+        
         <Label Grid.Row="9" Grid.ColumnSpan="2" Visibility="Hidden">Placeholder</Label>
+        
         <Label Grid.Row="10" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalContentAlignment="Center">Pricing</Label>
+        
         <Label Grid.Row="11" Grid.Column="0">Selling price: </Label>
-        <TextBox Grid.Row="11" Grid.Column="1" />
+        <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding SellingPrice, UpdateSourceTrigger=PropertyChanged}" />
+        
         <Label Grid.Row="12" Grid.Column="0">Extra cost: </Label>
-        <ComboBox Grid.Row="12" Grid.Column="1" x:Name="extraCost">
-            <ComboBoxItem Tag="FuelCost">Fuel cost</ComboBoxItem>
-            <ComboBoxItem Tag="ShippingCost">Shipping cost</ComboBoxItem>
-            <ComboBoxItem Tag="ShippingIncluded">Shipping included</ComboBoxItem>
-        </ComboBox>
-        <Label Grid.Row="13" Grid.Column="0">Cost: </Label>
-        <TextBox Grid.Row="13" Grid.Column="1" Name="fuelCostTextBox">
-            <TextBox.Style>
-                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-                    <Setter Property="TextBlock.Visibility" Value="Collapsed"></Setter>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=extraCost, Path=SelectedItem.Tag}" Value="FuelCost">
-                            <Setter Property="TextBlock.Visibility" Value="Visible" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
-        </TextBox>
-        <TextBox Grid.Row="13" Grid.Column="1">
-            <TextBox.Style>
-                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-                    <Setter Property="TextBlock.Visibility" Value="Collapsed"></Setter>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=extraCost, Path=SelectedItem.Tag}" Value="ShippingCost">
-                            <Setter Property="TextBlock.Visibility" Value="Visible" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
-        </TextBox>
-        <TextBox Grid.Row="13" Grid.Column="1" IsEnabled="False">
-            <TextBox.Style>
-                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
-                    <Setter Property="TextBox.Visibility" Value="Collapsed"></Setter>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=extraCost, Path=SelectedItem.Tag}" Value="ShippingIncluded">
-                            <Setter Property="TextBox.Visibility" Value="Visible" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
-        </TextBox>
+        <ComboBox Grid.Row="12" Grid.Column="1" x:Name="extraCost" 
+                  ItemsSource="{Binding Source={StaticResource ExtraCostType}, Converter={StaticResource ExtraCostTypeToText}, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding ExtraCostType, Converter={StaticResource ExtraCostTypeValueToText}}" />
+        
+        <Label Grid.Row="13" Grid.Column="0"
+               Visibility="{Binding ShowFuelCost, Converter={StaticResource BooleanToVisibilityConverter}}">Fuel Cost: </Label>
+        <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding FuelCost, UpdateSourceTrigger=PropertyChanged}" 
+                 Visibility="{Binding ShowFuelCost, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        
+        <Label Grid.Row="13" Grid.Column="0"
+               Visibility="{Binding ShowShippingCost, Converter={StaticResource BooleanToVisibilityConverter}}">Shipping Cost:</Label>
+        <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding ShippingCost, UpdateSourceTrigger=PropertyChanged}"
+                 Visibility="{Binding ShowShippingCost, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        
+        <Label Grid.Row="13" Grid.Column="0"
+               Visibility="{Binding ShowShippingIncluded, Converter={StaticResource BooleanToVisibilityConverter}}">Shipping Cost:</Label>
+        <TextBox Grid.Row="13" Grid.Column="1" IsEnabled="False"
+                 Visibility="{Binding ShowShippingIncluded, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        
         <Label Grid.Row="14" Grid.Column="0">Total price:</Label>
-        <TextBox Grid.Row="14" Grid.Column="1" IsEnabled="False" />
+        <TextBox Grid.Row="14" Grid.Column="1" IsEnabled="False" Text="{Binding TotalPrice, Mode=OneWay}" />
     </Grid>
 </UserControl>

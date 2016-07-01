@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,13 +64,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AddPurchaseModel.cs" />
     <Compile Include="AddPurchaseUserControl.xaml.cs">
       <DependentUpon>AddPurchaseUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddPurchaseViewModel.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EnumHelper.cs" />
+    <Compile Include="ExtraCostType.cs" />
+    <Compile Include="ExtraCostTypeToTextConverter.cs" />
+    <Compile Include="ExtraCostTypeValueToTextConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
