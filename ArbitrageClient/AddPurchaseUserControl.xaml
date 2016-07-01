@@ -67,7 +67,7 @@
         <Label Grid.Row="0" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalContentAlignment="Center">General</Label>
         
         <Label Grid.Row="1" Grid.Column="0">Purchase date: </Label>
-        <DatePicker Grid.Row="1" Grid.Column="1" Text="{Binding PurchaseDate}" />
+        <DatePicker Grid.Row="1" Grid.Column="1" Text="{Binding PurchaseDate, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
         
         <Label Grid.Row="2" Grid.ColumnSpan="2" Visibility="Hidden">Placeholder</Label>
         
