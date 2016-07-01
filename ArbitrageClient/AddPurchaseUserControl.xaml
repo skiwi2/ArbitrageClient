@@ -85,7 +85,7 @@
         <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding SellerTelephoneNumber}" />
         
         <Label Grid.Row="8" Grid.Column="0">Comments: </Label>
-        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding SellerComments}" />
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding SellerComments}" MinLines="3" TextWrapping="Wrap" AcceptsReturn="True" />
         
         <Label Grid.Row="9" Grid.ColumnSpan="2" Visibility="Hidden">Placeholder</Label>
         
