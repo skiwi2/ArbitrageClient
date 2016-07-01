@@ -8,7 +8,7 @@ namespace ArbitrageClient
 {
     class AddPurchaseModel
     {
-        private DateTime purchaseDate;
+        private DateTime purchaseDate = DateTime.Today;
 
         private string sellerName;
         private string sellerStreet;
@@ -20,8 +20,6 @@ namespace ArbitrageClient
         private ExtraCostType extraCostType;
         private decimal fuelCost;
         private decimal shippingCost;
-        private bool shippingIncluded;
-        private decimal totalPrice;
 
         public DateTime PurchaseDate
         {
