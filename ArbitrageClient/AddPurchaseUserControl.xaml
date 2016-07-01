@@ -5,15 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:core="clr-namespace:System;assembly=mscorlib"
              xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:ArbitrageClient"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        
+
         <local:ExtraCostTypeToTextConverter x:Key="ExtraCostTypeToText" />
         <local:ExtraCostTypeValueToTextConverter x:Key="ExtraCostTypeValueToText" />
-        
+
         <ObjectDataProvider x:Key="ExtraCostType" MethodName="GetValues" ObjectType="{x:Type core:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type Type="local:ExtraCostType" />
@@ -73,20 +74,36 @@
         <Label Grid.Row="3" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalContentAlignment="Center">Seller</Label>
         
         <Label Grid.Row="4" Grid.Column="0">Name: </Label>
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SellerName}" />
-        
+        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SellerName}">
+            <i:Interaction.Behaviors>
+                <local:TextBoxEnterKeyUpdateBehavior />
+            </i:Interaction.Behaviors>
+        </TextBox>
+
         <Label Grid.Row="5" Grid.Column="0">Street: </Label>
-        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SellerStreet}" />
+        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SellerStreet}">
+            <i:Interaction.Behaviors>
+                <local:TextBoxEnterKeyUpdateBehavior />
+            </i:Interaction.Behaviors>
+        </TextBox>
         
         <Label Grid.Row="6" Grid.Column="0">City: </Label>
-        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding SellerCity}" />
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding SellerCity}">
+            <i:Interaction.Behaviors>
+                <local:TextBoxEnterKeyUpdateBehavior />
+            </i:Interaction.Behaviors>
+        </TextBox>
         
         <Label Grid.Row="7" Grid.Column="0">Tel. number: </Label>
-        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding SellerTelephoneNumber}" />
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding SellerTelephoneNumber}">
+            <i:Interaction.Behaviors>
+                <local:TextBoxEnterKeyUpdateBehavior />
+            </i:Interaction.Behaviors>
+        </TextBox>
         
         <Label Grid.Row="8" Grid.Column="0">Comments: </Label>
         <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding SellerComments}" MinLines="3" TextWrapping="Wrap" AcceptsReturn="True" />
-        
+
         <Label Grid.Row="9" Grid.ColumnSpan="2" Visibility="Hidden">Placeholder</Label>
         
         <Label Grid.Row="10" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalContentAlignment="Center">Pricing</Label>
@@ -94,8 +111,12 @@
         <Label Grid.Row="11" Grid.Column="0">Selling price: </Label>
         <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label DockPanel.Dock="Left">€</Label>
-            <TextBox Width="60" TextAlignment="Right"
-                Text="{Binding SellingPrice, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="sellingPriceTextBox" Width="60" TextAlignment="Right"
+                Text="{Binding SellingPrice, StringFormat='F', UpdateSourceTrigger=LostFocus, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
+                <i:Interaction.Behaviors>
+                    <local:TextBoxEnterKeyUpdateBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
         </StackPanel>
 
         <Label Grid.Row="12" Grid.Column="0">Extra cost: </Label>
@@ -109,7 +130,11 @@
                     Visibility="{Binding ShowFuelCost, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Label DockPanel.Dock="Left">€</Label>
             <TextBox Width="60" TextAlignment="Right"
-                Text="{Binding FuelCost, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding FuelCost, StringFormat='F', UpdateSourceTrigger=LostFocus, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
+                <i:Interaction.Behaviors>
+                    <local:TextBoxEnterKeyUpdateBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
         </StackPanel>
         
         <Label Grid.Row="13" Grid.Column="0"
@@ -118,7 +143,11 @@
                     Visibility="{Binding ShowShippingCost, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Label DockPanel.Dock="Left">€</Label>
             <TextBox Width="60" TextAlignment="Right"
-                Text="{Binding ShippingCost, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding ShippingCost, StringFormat='F', UpdateSourceTrigger=LostFocus, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
+                <i:Interaction.Behaviors>
+                    <local:TextBoxEnterKeyUpdateBehavior />
+                </i:Interaction.Behaviors>
+            </TextBox>
         </StackPanel>
         
         <Label Grid.Row="13" Grid.Column="0"
@@ -127,14 +156,14 @@
                     Visibility="{Binding ShowShippingIncluded, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Label DockPanel.Dock="Left">€</Label>
             <TextBox Width="60" TextAlignment="Right" IsEnabled="False" 
-                     Text="{Binding ShippingIncludedCost, Mode=OneWay}" />
+                     Text="{Binding ShippingIncludedCost, Mode=OneWay, StringFormat='F', ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
         </StackPanel>
         
         <Label Grid.Row="14" Grid.Column="0">Total price:</Label>
         <StackPanel Grid.Row="14" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label DockPanel.Dock="Left">€</Label>
             <TextBox Width="60" TextAlignment="Right" IsEnabled="False"
-                Text="{Binding TotalPrice, Mode=OneWay}" />
+                Text="{Binding TotalPrice, Mode=OneWay, StringFormat='F', ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
         </StackPanel>
     </Grid>
 </UserControl>
