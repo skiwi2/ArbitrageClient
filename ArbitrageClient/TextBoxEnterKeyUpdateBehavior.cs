@@ -13,9 +13,10 @@ namespace ArbitrageClient
     {
         protected override void OnAttached()
         {
+            base.OnAttached();
+
             if (AssociatedObject != null)
             {
-                base.OnAttached();
                 AssociatedObject.KeyDown += AssociatedObject_KeyDown;
             }
         }
@@ -25,8 +26,9 @@ namespace ArbitrageClient
             if (AssociatedObject != null)
             {
                 AssociatedObject.KeyDown -= AssociatedObject_KeyDown;
-                base.OnDetaching();
             }
+
+            base.OnDetaching();
         }
 
         private void AssociatedObject_KeyDown(object sender, KeyEventArgs e)
