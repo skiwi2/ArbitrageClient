@@ -112,7 +112,7 @@
         
         <Label Grid.Row="11" Grid.Column="0">Selling price: </Label>
         <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Label DockPanel.Dock="Left">€</Label>
+            <Label DockPanel.Dock="Left" Content="{Binding CurrencySymbol, Mode=OneWay}" />
             <TextBox Width="60" TextAlignment="Right"
                      Text="{Binding SellingPrice, Mode=OneWayToSource, Converter={StaticResource DecimalToCurrencyStringConverter}, 
                                                   UpdateSourceTrigger=PropertyChanged, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
@@ -132,7 +132,7 @@
                Visibility="{Binding ShowFuelCost, Converter={StaticResource BooleanToVisibilityConverter}}">Fuel Cost: </Label>
         <StackPanel Grid.Row="13" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
                     Visibility="{Binding ShowFuelCost, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Label DockPanel.Dock="Left">€</Label>
+            <Label DockPanel.Dock="Left" Content="{Binding CurrencySymbol, Mode=OneWay}" />
             <TextBox Width="60" TextAlignment="Right"
                      Text="{Binding FuelCost, Mode=OneWayToSource, Converter={StaticResource DecimalToCurrencyStringConverter}, 
                                               UpdateSourceTrigger=PropertyChanged, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
@@ -147,7 +147,7 @@
                Visibility="{Binding ShowShippingCost, Converter={StaticResource BooleanToVisibilityConverter}}">Shipping Cost:</Label>
         <StackPanel Grid.Row="13" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
                     Visibility="{Binding ShowShippingCost, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Label DockPanel.Dock="Left">€</Label>
+            <Label DockPanel.Dock="Left" Content="{Binding CurrencySymbol, Mode=OneWay}" />
             <TextBox Width="60" TextAlignment="Right"
                      Text="{Binding ShippingCost, Mode=OneWayToSource, Converter={StaticResource DecimalToCurrencyStringConverter}, 
                                                   UpdateSourceTrigger=PropertyChanged, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
@@ -162,14 +162,14 @@
                Visibility="{Binding ShowShippingIncluded, Converter={StaticResource BooleanToVisibilityConverter}}">Shipping Cost:</Label>
         <StackPanel Grid.Row="13" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
                     Visibility="{Binding ShowShippingIncluded, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Label DockPanel.Dock="Left">€</Label>
+            <Label DockPanel.Dock="Left" Content="{Binding CurrencySymbol, Mode=OneWay}" />
             <TextBox Width="60" TextAlignment="Right" IsEnabled="False" 
                      Text="{Binding ShippingIncludedCost, Mode=OneWay, StringFormat='F', ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
         </StackPanel>
         
         <Label Grid.Row="14" Grid.Column="0">Total price:</Label>
         <StackPanel Grid.Row="14" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Label DockPanel.Dock="Left">€</Label>
+            <Label DockPanel.Dock="Left" Content="{Binding CurrencySymbol, Mode=OneWay}" />
             <TextBox Width="60" TextAlignment="Right" IsEnabled="False"
                 Text="{Binding TotalPrice, Mode=OneWay, StringFormat='F', ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
         </StackPanel>
