@@ -22,7 +22,7 @@ namespace ArbitrageClient
                 AssociatedObject.LostFocus += AssociatedObject_LostFocus;
 
                 decimal initialValue = (decimal)AssociatedObject.GetBindingExpression(TextBox.TextProperty).GetResolvedSourceObject();
-                AssociatedObject.Text = FormatCurrency(initialValue);
+                AssociatedObject.Text = string.Format("{0:F}", initialValue);
             }
         }
 
@@ -68,16 +68,8 @@ namespace ArbitrageClient
             decimal output;
             if (decimal.TryParse(AssociatedObject.Text, out output))
             {
-                AssociatedObject.Text = FormatCurrency(output);
+                AssociatedObject.Text = string.Format("{0:F}", output);
             }
-        }
-
-        private string FormatCurrency(decimal value)
-        {
-            NumberFormatInfo numberFormatInfoClone = (NumberFormatInfo)CultureInfo.CurrentCulture.NumberFormat.Clone();
-            numberFormatInfoClone.CurrencySymbol = "";
-
-            return string.Format(numberFormatInfoClone, "{0:C}", value).Trim();
         }
     }
 }
