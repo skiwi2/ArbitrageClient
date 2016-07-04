@@ -62,6 +62,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BindingExpressionHelper.cs" />
+    <Compile Include="CurrencyToDecimalConverter.cs" />
+    <Compile Include="TextBoxBindingToCurrencyBehavior.cs" />
     <Compile Include="TextBoxEnterKeyUpdateBehavior.cs" />
     <Page Include="AddPurchaseUserControl.xaml">
       <SubType>Designer</SubType>

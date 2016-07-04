@@ -12,8 +12,10 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
-        <local:ExtraCostTypeToTextConverter x:Key="ExtraCostTypeToText" />
-        <local:ExtraCostTypeValueToTextConverter x:Key="ExtraCostTypeValueToText" />
+        <local:ExtraCostTypeToTextConverter x:Key="ExtraCostTypeToTextConverter" />
+        <local:ExtraCostTypeValueToTextConverter x:Key="ExtraCostTypeValueToTextConverter" />
+
+        <local:DecimalToCurrencyStringConverter x:Key="DecimalToCurrencyStringConverter" />
 
         <ObjectDataProvider x:Key="ExtraCostType" MethodName="GetValues" ObjectType="{x:Type core:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -111,9 +113,11 @@
         <Label Grid.Row="11" Grid.Column="0">Selling price: </Label>
         <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label DockPanel.Dock="Left">€</Label>
-            <TextBox x:Name="sellingPriceTextBox" Width="60" TextAlignment="Right"
-                Text="{Binding SellingPrice, StringFormat='F', UpdateSourceTrigger=LostFocus, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
+            <TextBox Width="60" TextAlignment="Right"
+                     Text="{Binding SellingPrice, Mode=OneWayToSource, Converter={StaticResource DecimalToCurrencyStringConverter}, 
+                                                  UpdateSourceTrigger=PropertyChanged, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
                 <i:Interaction.Behaviors>
+                    <local:TextBoxBindingToCurrencyBehavior />
                     <local:TextBoxEnterKeyUpdateBehavior />
                 </i:Interaction.Behaviors>
             </TextBox>
@@ -121,8 +125,8 @@
 
         <Label Grid.Row="12" Grid.Column="0">Extra cost: </Label>
         <ComboBox Grid.Row="12" Grid.Column="1"
-                  ItemsSource="{Binding Source={StaticResource ExtraCostType}, Converter={StaticResource ExtraCostTypeToText}, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding ExtraCostType, Converter={StaticResource ExtraCostTypeValueToText}}" />
+                  ItemsSource="{Binding Source={StaticResource ExtraCostType}, Converter={StaticResource ExtraCostTypeToTextConverter}, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding ExtraCostType, Converter={StaticResource ExtraCostTypeValueToTextConverter}}" />
         
         <Label Grid.Row="13" Grid.Column="0"
                Visibility="{Binding ShowFuelCost, Converter={StaticResource BooleanToVisibilityConverter}}">Fuel Cost: </Label>
@@ -130,8 +134,10 @@
                     Visibility="{Binding ShowFuelCost, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Label DockPanel.Dock="Left">€</Label>
             <TextBox Width="60" TextAlignment="Right"
-                Text="{Binding FuelCost, StringFormat='F', UpdateSourceTrigger=LostFocus, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
+                     Text="{Binding FuelCost, Mode=OneWayToSource, Converter={StaticResource DecimalToCurrencyStringConverter}, 
+                                              UpdateSourceTrigger=PropertyChanged, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
                 <i:Interaction.Behaviors>
+                    <local:TextBoxBindingToCurrencyBehavior />
                     <local:TextBoxEnterKeyUpdateBehavior />
                 </i:Interaction.Behaviors>
             </TextBox>
@@ -143,8 +149,10 @@
                     Visibility="{Binding ShowShippingCost, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Label DockPanel.Dock="Left">€</Label>
             <TextBox Width="60" TextAlignment="Right"
-                Text="{Binding ShippingCost, StringFormat='F', UpdateSourceTrigger=LostFocus, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
+                     Text="{Binding ShippingCost, Mode=OneWayToSource, Converter={StaticResource DecimalToCurrencyStringConverter}, 
+                                                  UpdateSourceTrigger=PropertyChanged, ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}">
                 <i:Interaction.Behaviors>
+                    <local:TextBoxBindingToCurrencyBehavior />
                     <local:TextBoxEnterKeyUpdateBehavior />
                 </i:Interaction.Behaviors>
             </TextBox>
